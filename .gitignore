@@ -1,0 +1,11 @@
+# AI Service Ignores
+ai-service/venv/
+ai-service/__pycache__/
+ai-service/*.pyc
+
+# Backend Ignores
+ringside-backend/node_modules/
+ringside-backend/dist/
+
+# Database Ignores
+pg_data/

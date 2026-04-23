@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+psycopg2-binary
+pandas
+scikit-learn
+joblib
+groq
+langchain-huggingface
+langchain-community
+sentence-transformers
+pypdf
