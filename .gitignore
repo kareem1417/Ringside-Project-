@@ -2,6 +2,9 @@
 ai-service/venv/
 ai-service/__pycache__/
 ai-service/*.pyc
+ai-service/books/
+ai-service/*.pkl
+ai-service/*.csv
 
 # Backend Ignores
 ringside-backend/node_modules/
