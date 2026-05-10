@@ -5,8 +5,8 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 
 # db connection string
-DB_CONFIG = "host=db dbname=ringside user=postgres password=rootpassword port=5432"
-
+# هيقرأ من الكلاود، ولو ملقاهوش هيقرأ بتاع اللاب توب
+DB_CONFIG = os.environ.get("DATABASE_URL", "host=localhost dbname=ringside_db user=ringside password=ringside_pass port=5432")
 # init embedding model
 embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 

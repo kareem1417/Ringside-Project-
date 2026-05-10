@@ -1,7 +1,8 @@
 import psycopg2
 from langchain_huggingface import HuggingFaceEmbeddings
 
-DB_CONFIG = "host=localhost dbname=ringside user=postgres password=rootpassword port=5432"
+# هيقرأ من الكلاود، ولو ملقاهوش هيقرأ بتاع اللاب توب
+DB_CONFIG = os.environ.get("DATABASE_URL", "host=localhost dbname=ringside_db user=ringside password=ringside_pass port=5432")
 embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
 def search_knowledge(query, sport="boxing", limit=3):

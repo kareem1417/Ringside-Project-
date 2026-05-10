@@ -5,6 +5,7 @@ ai-service/*.pyc
 ai-service/books/
 ai-service/*.pkl
 ai-service/*.csv
+ai-service/.env
 
 # Backend Ignores
 ringside-backend/node_modules/

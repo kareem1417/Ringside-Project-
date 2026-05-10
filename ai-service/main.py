@@ -8,8 +8,9 @@ from pydantic import BaseModel
 from typing import List, Optional
 from langchain_huggingface import HuggingFaceEmbeddings
 from sentence_transformers import CrossEncoder
+from dotenv import load_dotenv
 
-
+load_dotenv()
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 client = Groq(api_key=GROQ_API_KEY)
 
@@ -17,8 +18,8 @@ app = FastAPI(title="Ringside AI Service", description="AI and ML Engine for Rin
 
 embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 cross_encoder = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
-DB_CONFIG = "host=localhost dbname=ringside user=postgres password=rootpassword port=5432"
-
+# هيقرأ من الكلاود، ولو ملقاهوش هيقرأ بتاع اللاب توب
+DB_CONFIG = os.environ.get("DATABASE_URL", "host=localhost dbname=ringside_db user=ringside password=ringside_pass port=5432")
 try:
     ml_pipeline = joblib.load('champion_model.pkl')
     ml_model = ml_pipeline['model']
@@ -164,7 +165,7 @@ async def recommend_program(profile: UserProfile):
             
         # analyzing the goal and weight
         if profile.Goal == "Weight Loss":
-            reason += f"It incorporates sustained cardio zones optimized to help you burn calories safely at your current weight ({profile.Weight}kg)."
+            reason += f"It incorporates sustained cardio zones optimized to help you burn calories safely at your current weight ({profile.Weight_kg}kg)."
         elif profile.Goal in ["Strength", "Muscle Gain"]:
             reason += "It emphasizes progressive overload to maximize muscle recruitment and power."
         elif profile.Goal == "Endurance":
@@ -172,7 +173,7 @@ async def recommend_program(profile: UserProfile):
         return {
             "recommended_program_id": recommended_program,
             "confidence": "94.40%",
-            "model_used": "Random Forest Classifier",
+            "model_used": "Decision Tree",
             "reason": reason
         }
 
